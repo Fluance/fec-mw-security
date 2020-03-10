@@ -1,0 +1,625 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Fluance User Service",
+		"_postman_id": "a040d59e-9134-8f24-b70b-d91ff1ad9829",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JWT",
+			"description": "",
+			"item": [
+				{
+					"name": "Get JWT for patient",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/jwt/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"signingAlgorithm\": null,\r\n  \"signed\": true,\r\n  \"header\": {},\r\n  \"payload\": {\r\n      \"pid\": \"{{patient_id}}\",\r\n      \"firstName\": \"{{patient_firstname}}\",  \r\n      \"lastName\": \"{{patient_lastname}}\",  \r\n      \"birthDate\": \"{{patient_birthdate}}\",\r\n      \"sex\": \"{{patient_sex}}\",\r\n      \"username\": \"{{patient_id}}\",\r\n      \"role\": \"patient\"\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get JWT for known user",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/jwt/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"signingAlgorithm\": null,\r\n  \"signed\": true,\r\n  \"header\": {},\r\n  \"payload\": {}\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OAuth2",
+			"description": "",
+			"item": [
+				{
+					"name": "Refresh OAuth2 token",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/oauth2/token/refresh",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refresh_token\": \"9bfa715f61c1ef465315a617c27c8c\",\n  \"grant_type\": \"refresh_token\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get OAuth2 access token from WSO2 IS",
+					"request": {
+						"url": "https://{{server_host}}:9444/oauth2/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic {{oauth2_authorization}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-formurlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "username",
+									"value": "localtestuser2",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "Fluance2015*",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete user profile",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/localtestuser3/fluance",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create user profile",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"domain\": \"fluance\",\n  \"username\": \"localtestuser3\",\n  \"grants\": {\n    \"roles\": [\n      \"everyone\",\n      \"nurse\"\n    ],\n    \"companies\": [\n      {\n        \"id\": 6,\n        \"code\": \"CDM\",\n        \"patientunits\": [\n          {\n            \"code\": \"1C\"\n          },\n          {\n            \"code\": \"1E\"\n          },\n          {\n            \"code\": \"2E\"\n          },\n          {\n            \"code\": \"4E\"\n          },\n          {\n            \"code\": \"4J\"\n          },\n          {\n            \"code\": \"5E\"\n          },\n          {\n            \"code\": \"5L\"\n          },\n          {\n            \"code\": \"5O\"\n          },\n          {\n            \"code\": \"5S\"\n          }\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 7,\n        \"code\": \"CDV\",\n        \"patientunits\": [\n          {\n            \"code\": \"1E\"\n          },\n          {\n            \"code\": \"1S\"\n          },\n          {\n            \"code\": \"2E\"\n          },\n          {\n            \"code\": \"3E\"\n          },\n          {\n            \"code\": \"4E\"\n          }\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 12,\n        \"code\": \"HDP\",\n        \"patientunits\": [\n          {\n            \"code\": \"44\"\n          }\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 13,\n        \"code\": \"PKV\",\n        \"patientunits\": [\n          {\n            \"code\": \"D1\"\n          }\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      }\n    ]\n  }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create application user profile",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"domain\": \"fluance\",\n  \"username\": \"fluance\",\n  \"grants\": {\n    \"roles\": [\n      \"everyone\",\n      \"patient\"\n    ],\n    \"companies\": []\n  }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Read user profile",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/localtestuser3/fluance",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contentBody",
+									"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Read application user profile",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/fluance/fluance",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contentBody",
+									"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Set user companies",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/companies/set",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companies\":[{\"id\":4,\"staffids\":[{\"providerid\":1,\"staffid\":\"210\"}],\"patientunits\":[\"01\",\"02\"],\"hospservices\":[\"GOON\",\"GOPA\"]}]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Grant user companies",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/companies/grant",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\n\"companies\": [\n      {\n        \"id\": 6,\n        \"patientunits\": [\n            \"1C\",\n            \"1E\",\n            \"2E\",\n            \"4E\",\n            \"4J\",\n            \"5E\",\n            \"5L\",\n            \"5O\",\n            \"5S\"\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 7,\n        \"patientunits\": [\n            \"1E\",\n            \"1S\",\n            \"2E\",\n            \"3E\",\n            \"4E\"\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 12,\n        \"patientunits\": [\n            \"44\"\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      },\n      {\n        \"id\": 13,\n        \"patientunits\": [\n            \"D1\"\n        ],\n        \"hospservices\": [],\n        \"staffids\": []\n      }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke user companies ",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/companies/revoke",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companies\":[7,13]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Grant user patientunits in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/patientunits/grant",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"patientunits\":[\"03\",\"04\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Set user patientunits in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/patientunits/set",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"patientunits\":[\"01\",\"02\",\"04\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke user patientunits in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/patientunits/revoke",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"patientunits\":[\"01\", \"04\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Set user hospservices in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/hospservices/set",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"hospservices\":[\"GOON\",\"CMP\",\"DIE\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Grant user hospservices in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/hospservices/grant",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"hospservices\":[\"GOPA\",\"RAD\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke user hospservices in company",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/hospservices/revoke",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"companyid\":4,\"hospservices\":[\"GOON\",\"DIE\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Set user roles",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/roles/set",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"roles\":[\"physician\", \"nurse\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Grant user roles",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/roles/grant",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"roles\":[\"financial\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Revoke user roles",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/user/profile/roles/revoke",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"localtestuser3\",\"domain\":\"fluance\",\"roles\":[\"physician\"]}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User client data",
+			"description": "",
+			"item": [
+				{
+					"name": "Read user client data",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/client/userdata/localtestuser3/fluance/{{client_id}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contentBody",
+									"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Save user client data",
+					"request": {
+						"url": "{{http_scheme}}://{{server_host}}:{{server_port}}/client/userdata/localtestuser3/fluance",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{wso2is_oauth2_access_token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"client_id\":\"{{client_id}}\", \"history\":{\"key\":\"history\"}, \"preferences\":{\"key\": \"preferences\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

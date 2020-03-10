@@ -1,0 +1,21 @@
+{
+	"partners": [
+		{
+			"name": "fluance",
+			"ssl-key-alias": "fluance",
+			"jwt-spec": {
+				"header": {
+					"signing-algorithm": "RS256",
+					"type": "JWT"
+				},
+				"payload": {
+					"validity-period": "3600",
+					"dynamic-claims": [
+						"username",
+						"domain"
+					]
+				}
+			}
+		}
+	]
+}

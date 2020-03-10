@@ -1,0 +1,38 @@
+{
+	"partners": [
+		{
+			"name": "fluance",
+			"ssl-key-alias": "fluanceroot",
+			"jwt-spec": {
+				"header": {
+					"signing-algorithm": "RS256",
+					"type": "JWT"
+				},
+				"payload": {
+					"validity-period": "3600",
+					"dynamic-claims": [
+						"username",
+						"domain"
+					]
+				}
+			}
+		}, 
+		{
+			"name": "oxygen",
+			"ssl-key-alias": "oxygen-jwt",
+			"jwt-spec": {
+				"header": {
+					"signing-algorithm": "RS256",
+					"type": "JWT"
+				},
+				"payload": {
+					"validity-period": "3600",
+					"dynamic-claims": [
+						"username",
+						"domain"
+					]
+				}
+			}
+		}
+	]
+}

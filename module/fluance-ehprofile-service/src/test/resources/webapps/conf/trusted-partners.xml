@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<partners>
+	<partner name="fluance" ssl-key-alias="fluance">
+		<jwt-spec>
+			<header>
+				<signing-algorithm>RS256</signing-algorithm>
+				<type>JWT</type>
+			</header>
+			<payload>
+				<!-- Expiration time in seconds -->
+				<expiration-time>3600</expiration-time>
+				<dynymic-claims>
+					<dynamic-claim>username</dynamic-claim>
+					<dynamic-claim>domain</dynamic-claim>
+				</dynymic-claims>
+			</payload>
+		</jwt-spec>
+	</partner>
+</partners>

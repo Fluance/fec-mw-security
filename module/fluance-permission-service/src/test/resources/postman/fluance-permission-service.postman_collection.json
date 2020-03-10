@@ -1,0 +1,185 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Fluance Permission Service",
+		"_postman_id": "99fba207-b091-6e73-f76f-c4004841f505",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Permit /companies",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/companies&username=yvpo&domain=corporate&action=GET&user_roles=administrative&user_roles=sysadmin",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deny /companies",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/companies&username=localtestuser2&domain=local&action=GET&user_roles=none",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Fake policy test",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=https://localhost:8443/mw-app/company/list&username=yvpo&domain=corporate&action=GET&user_roles=administrative&user_roles=sysadmin",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Permit /patients",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/patients&username=yvpo&domain=corporate&action=GET&user_roles=administrative&user_roles=sysadmin",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deny /patients",
+			"request": {
+				"url": "http://192.168.245.128:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/patients&username=yvpo&domain=corporate&action=GET&user_roles=norole&user_roles=nomoreroles",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Permit /visits",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/visits&username=yvpo&domain=corporate&action=GET&user_roles=administrative&user_roles=sysadmin",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Deny /visits",
+			"request": {
+				"url": "http://localhost:8080/permission/xacml/evaluate?resource=http://localhost:8080/mw-app-2.0.0/visits&username=yvpo&domain=corporate&action=GET&user_roles=norole&user_roles=nomoreroles",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Evaluation request with body",
+			"request": {
+				"url": "http://192.168.245.128:8080/permission/xacml/evaluate",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "contentBody",
+							"value": "{\"resource\":\"http://localhost/company/list\",\"username\":\"test\",\"action\":\"GET\",\"user_roles\":[\"sysadmin\",\"superadmin\"]}",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
